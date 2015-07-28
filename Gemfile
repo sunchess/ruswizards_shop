@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'thin'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -32,9 +34,32 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :development do
+  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails', '~> 1.1.0'
+  gem 'capistrano-rails-console'
+  gem 'capistrano-rvm', '~> 0.1.1'
+
+  gem 'spring'
+  gem 'quiet_assets'
+  gem 'rename'
+  gem 'bullet'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+  
+  gem 'awesome_print'
+
+  gem 'factory_girl_rails'
+  gem 'faker'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -43,3 +68,27 @@ group :development, :test do
   gem 'spring'
 end
 
+# Databases
+gem 'pg'
+gem 'mysql2',          '~> 0.3.13', :platform => :ruby
+gem 'thinking-sphinx', '~> 3.1.0'
+gem 'redis'
+gem 'redis-rails'
+
+# Frontend
+gem 'slim'
+gem 'slim-rails'
+gem 'stylus'
+
+# Uploaders and Image tools
+gem 'rmagick'
+gem 'carrierwave'
+
+# Auth and roles
+gem 'devise'
+
+# Utils
+gem 'gon'
+gem 'russian'
+gem 'aasm'
+gem 'google_currency'
