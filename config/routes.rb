@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  root 'application#index'
+
+  scope :ajax do
+
+  end
+
+  get "/*path" => "application#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
