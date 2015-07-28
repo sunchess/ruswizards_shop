@@ -5,10 +5,12 @@
   .nav
     height: 100%
     display: table
+    float: left
     
     &__list
       display: table-cell
-      vertical-align: middle  
+      vertical-align: middle
+      padding-left: 30px
     
     &__item
       font-weight: 700
@@ -21,19 +23,38 @@
       
       &:hover
         color: #989898
+        
+  &__user
+    position: absolute
+    right: 30px
+    top: 35px
+    
+    a
+      color: rgb(3, 169, 244)
 
-.sidebar
-  border-right: 1px solid #eee
-  position: absolute
-  top: 90px
-  bottom: 0
-  width: 320px
-  
 .content
   position: absolute
   top: 90px
-  left: 350px
+  left: 380px
   right: 0
   bottom: 0
   display: block
   overflow-y: auto
+  
+.text-search
+  position: absolute
+  top: 0
+  right: 0
+  padding: 30px
+  left: 550px
+  
+  i
+    position: absolute
+    z-index: 1
+    margin: 7px
+    display: inline-block
+    color: #939393
+
+  input[type="text"]
+    width: 300px
+    padding-left: 30px

@@ -16,8 +16,38 @@ html ng-app="app"
           a.nav__item href="" Доставка
           a.nav__item href="" Контакты
 
+      .text-search
+        i.icon-search
+        input type="text" placeholder="Поиск"
+
+      .header__user
+        .header__user__name
+          | Иванов Иван (
+          a href="" Выход
+          | )
+
     aside.sidebar
+      .sidebar__title Корзина
+      .sidebar__cart-no-result Корзина пуста
+
+      .sidebar__title Категория
+      .sidebar__category ng-repeat="item in [1,2,3,4,5]"
+        label.checkbox
+          input type="checkbox"
+          .checker
+          | Категория
+
+      .sidebar__title Цена
+      .sidebar__price
+        af-dimension.disabled options="[{id: 1, title: 'руб'}]" before="'от'"
+      .sep –
+      .sidebar__price
+        af-dimension.disabled options="[{id: 1, title: 'руб'}]" before="'до'"
+
+      a.btn.btn-primary.sidebar__apply Применить
 
     ng-view.content
+    
+    = render 'components/dimension'
 
     = javascript_include_tag 'application'
