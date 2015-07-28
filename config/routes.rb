@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :products
   devise_for :users
 
   root 'application#index'
 
   scope :ajax do
-
+    resources :products
   end
 
   get "/*path" => "application#index"

@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-html lang="en"
-head
-  meta charset="UTF-8"
-  title RusWizard Shop
-  = csrf_meta_tags
-  = stylesheet_link_tag 'application'
-body
-  ng-view
+html ng-app="app"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    base href="/"
+    title RusWizard Shop
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application'
+  body
+    header.header
+      nav.nav
+        ul.nav__list
+          a.nav__item href="" Главная
+          a.nav__item href="" Каталог товаров
+          a.nav__item href="" Доставка
+          a.nav__item href="" Контакты
 
-  = javascript_include_tag 'application'
+    aside.sidebar
+
+    ng-view.content
+
+    = javascript_include_tag 'application'

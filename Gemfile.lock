@@ -113,6 +113,9 @@ GEM
       multi_json (~> 1.2)
     joiner (0.3.4)
       activerecord (>= 4.1.0)
+    js-routes (1.0.1)
+      railties (>= 3.2)
+      sprockets-rails
     json (1.8.3)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
@@ -292,6 +295,7 @@ DEPENDENCIES
   gon
   google_currency
   jbuilder (~> 2.0)
+  js-routes
   mysql2 (~> 0.3.13)
   pg
   pry

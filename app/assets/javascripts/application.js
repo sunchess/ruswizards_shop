@@ -9,11 +9,13 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//= underscore
-//= angular
-//= angular-route
-//= angular-animate
-//= angular-resource
+//= require underscore
+//= require angular
+//= require angular-route
+//= require angular-animate
+//= require angular-resource
+
+//= require js-routes
 
 //= require_self
 //= require_tree .
