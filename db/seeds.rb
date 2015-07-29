@@ -41,8 +41,8 @@ json_categories.each do |json_category|
   doc.css('#catalogGoodsBlock .b-product').each do |node|
     price = node.css('.b-price__num')[0].content.strip.delete(' ')
     title = node.css('.b-product__title')[0].content.strip
-    img = node.css('.b-product__img img')[0]["src"]
-    product = category.products.where(title: title, price: price).first_or_create
+    img = node.css('.b-product__img img')[0]["src"].gsub('small', 'mid').gsub('s.', '.')
+    product = Product.where(title: title, price: price, category_id: category.id).first_or_create
 
     photo = Photo.new
     photo.remote_photo_url = img

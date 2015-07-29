@@ -4,7 +4,17 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all.includes(:category, :photos)
+    if params[:filter]
+      json_filter = JSON.parse(params[:filter])
+      filter = Product.filter json_filter
+
+      product_ids = Product.search_for_ids json_filter["query"], :per_page => 10000
+      @products = Product.where(id: product_ids).where(filter)
+    else
+      @products = Product.all
+    end
+
+    @products = @products.includes(:category, :photos)
   end
 
   # GET /products/1
