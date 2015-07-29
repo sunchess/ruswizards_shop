@@ -21,10 +21,36 @@ html ng-app="app"
         input type="text" placeholder="Поиск" ng-model="Search.filter.query"
 
       .header__user
-        .header__user__name
-          | Иванов Иван (
-          a href="" Выход
-          | )
+        - if user_signed_in?
+          .header__user__name
+            | Иванов Иван (
+            a href="" Выход
+            | )
+        - else
+          a.btn.btn-success.header__user__btn Регистрация
+          a.btn.btn-primary.header__user__btn ng-click="isShowSignIn=!isShowSignIn" Вход
+
+    .sign ng-class="{show: isShowSignIn}"
+      .sign__header
+        .sign__close &times;
+        h3 Вход
+      .sign__body
+        form
+          .row
+            label.label Эл. почта
+            .input
+              input type="text"
+          .row
+            label.label Пароль
+            .input
+              input type="password"
+          .row
+            label.checkbox.sign__remember
+              input type="checkbox"
+              .checker
+              | Запомнить
+
+            input.btn.btn-primary.pull-right value="Войти" type="submit"
 
     aside.sidebar
       .sidebar__title Корзина

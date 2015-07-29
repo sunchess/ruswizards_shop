@@ -46,6 +46,18 @@ body
   content: " "
   clear: both
   height: 0
+
+h3
+  font-weight: 700
+  color: #333
+  font-size: 16px
+  text-decoration: none
+  text-transform: uppercase
+  letter-spacing: 1px
+  margin: 10px 0 20px 0
+
+a
+  color: rgb(3, 169, 244)
     
 .checkbox
   cursor: pointer
@@ -117,6 +129,7 @@ input[type="number"]
   padding: 0 20px
   text-align: center
   border-radius: 3px
+  border: none
   cursor: pointer
   white-space: nowrap
   display: inline-block
@@ -146,6 +159,11 @@ input[type="number"]
     btn(#03a9f4)
     color: white
 
+
+  &-success
+    btn(#4CAF50)
+    color: white
+
 .sep
   display: inline-block
   height: 30px
@@ -155,3 +173,15 @@ input[type="number"]
   font-size: 24px
   text-align: center
   vertical-align: bottom
+  
+label.label
+  margin-bottom: 3px
+  display: inline-block
+  color: #808080
+  
+.row
+  margin-bottom: 20px
+  
+.input
+  input
+    width: 100%
