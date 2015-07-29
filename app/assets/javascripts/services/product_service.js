@@ -7,7 +7,7 @@ app.service('Product', ['$product', '$http', function ($product, $http) {
       product_ids.push(id)
       Product.inCart.push(id);
     });
-    $http.put(Routes.cart_path(), {product_ids: product_ids})
+    $http.post(Routes.carts_path(), {product_ids: product_ids})
   }
 
   Product.deleteToCart = function (id, count) {
