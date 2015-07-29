@@ -11,6 +11,7 @@
 // about supported directives.
 //= require underscore
 //= require angular
+//= require angular-locale_ru-ru
 //= require angular-route
 //= require angular-animate
 //= require angular-resource
@@ -22,3 +23,8 @@
 
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource']);
+
+
+app.run(['$rootScope', function ($rootScope) {
+  $rootScope.categories = gon.categories;
+}])

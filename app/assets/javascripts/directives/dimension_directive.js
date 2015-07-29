@@ -18,7 +18,7 @@ app.directive('afDimension', ['$rootScope', function($rootScope) {
     // transclude: true,
     // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
     link: function($scope, iElm, iAttrs, controller) {
-      $scope.uid = window.guid();
+      $scope.uid = $rootScope.guid();
 
       $scope.toggle = function ($event) {
         if (!$scope.disabled) {
@@ -35,7 +35,7 @@ app.directive('afDimension', ['$rootScope', function($rootScope) {
 
       $scope.setActive = function (id) {
         $scope.ngModelDimension = id;
-        $scope.currentOption = findById($scope.options, id).title;
+        $scope.currentOption = $rootScope.findById($scope.options, id).title;
         $scope.isShow = false;
       }
 

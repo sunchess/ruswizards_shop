@@ -10,6 +10,45 @@
 admin = User.where(email: "admin@admin.com")
 
 unless admin.any?
-  admin.first_or_create(password: "123123123", fullname: "Администратор магазина", address: "Россия, Москва, ул. Случайная 123", phone: "8-800-123-12-34")
   p "Создание администратора"
+  admin.first_or_create(password: "123123123", fullname: "Администратор магазина", address: "Россия, Москва, ул. Случайная 123", phone: "8-800-123-12-34")
+end
+
+# Categories
+
+json_categories = [
+  {
+    title: "Apple iPad",
+    url: "http://www.ulmart.ru/catalog/95387?sort=5&viewType=1&rec=true"
+  },
+  {
+    title: "Apple iPhone",
+    url: "http://www.ulmart.ru/search?string=apple+iphone&category=80252&sort=5&rec=false"
+  },
+  {
+    title: "Apple Macbook",
+    url: "http://www.ulmart.ru/catalog/10098212?pageNum=1&pageSize=30&sort=5&viewType=1&rec=true"
+  }
+]
+
+# Products
+p "Создание категорий и продуктов"
+json_categories.each do |json_category|
+  category = Category.where(title: json_category[:title]).first_or_create
+  ap category.title
+
+  doc = Nokogiri::HTML(open(json_category[:url]))
+  doc.css('#catalogGoodsBlock .b-product').each do |node|
+    price = node.css('.b-price__num')[0].content.strip.delete(' ')
+    title = node.css('.b-product__title')[0].content.strip
+    img = node.css('.b-product__img img')[0]["src"]
+    product = category.products.where(title: title, price: price).first_or_create
+
+    photo = Photo.new
+    photo.remote_photo_url = img
+    product.photos << photo
+
+    ap title
+    ap price
+  end
 end

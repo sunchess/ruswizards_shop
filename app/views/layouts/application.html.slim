@@ -49,5 +49,6 @@ html ng-app="app"
     ng-view.content
     
     = render 'components/dimension'
-
+    
+    = Gon::Base.render_data({})
     = javascript_include_tag 'application'

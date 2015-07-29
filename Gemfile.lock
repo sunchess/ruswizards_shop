@@ -297,6 +297,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   js-routes
   mysql2 (~> 0.3.13)
+  nokogiri
   pg
   pry
   pry-byebug

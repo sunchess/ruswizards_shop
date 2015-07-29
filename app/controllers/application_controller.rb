@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   layout :false
 
   def index
+    gon.categories = Category.all
     render "layouts/application"
   end
 end

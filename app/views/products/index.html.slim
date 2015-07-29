@@ -2,10 +2,14 @@
   .products__count Найдено 209 результатов
 
   .products__list
-    .product ng-repeat="product in [1,2,3,4,5,6]"
+    .product ng-repeat="product in products.list"
       .product__body
+        img.product__image ng-src="{{product.photos[0].photo.url}}"
       .product__footer
-        .product__title Материнская плата
-        .product__category Комплектующие
-        .product__price 100 руб
+        .product__title
+          | {{product.title}}
+        .product__category
+          | {{product.category_title}}
+        .product__price
+          | {{product.price | number}} руб
         .product__add-to-cart В корзину

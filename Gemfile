@@ -77,6 +77,9 @@ gem 'carrierwave'
 # Auth and roles
 gem 'devise'
 
+# XML Parser
+gem 'nokogiri'
+
 # Utils
 gem 'gon'
 gem 'russian'
