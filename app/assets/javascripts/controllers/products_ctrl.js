@@ -1,11 +1,10 @@
-app.controller('ProductsCtrl', ['$scope', '$product', 'Search', function ($scope, $product, Search) {
+app.controller('ProductsCtrl', ['$scope', '$product', 'Search', 'Product', function ($scope, $product, Search, Product) {
   var products = this;
-
-  products.list = $product.query();
 
   $scope.$watch(function () {
     return Search.filter
-  }, function (val) {
-    products.list = $product.query({filter: val})
+  }, function (params) {
+    Search.start(params)
   }, true)
+
 }]);

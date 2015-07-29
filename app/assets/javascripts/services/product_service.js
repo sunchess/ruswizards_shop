@@ -1,6 +1,5 @@
 app.service('Product', ['$product', function ($product) {
   var Product = this;
-
 }]);
 
 app.factory('$product', ['$resource', function ($resource) {

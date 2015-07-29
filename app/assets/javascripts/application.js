@@ -25,7 +25,8 @@
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource']);
 
 
-app.run(['$rootScope', 'Search', function ($rootScope, Search) {
+app.run(['$rootScope', 'Search', 'Product', function ($rootScope, Search, Product) {
   $rootScope.categories = gon.categories;
   $rootScope.Search = Search;
+  $rootScope.Product = Product;
 }])
