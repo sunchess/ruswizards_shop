@@ -18,9 +18,10 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    render json: {msg: "Осуществлен выход из системы"}
+  end
 
   # protected
 

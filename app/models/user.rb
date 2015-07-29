@@ -6,5 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :users_products
 
-  has_many :products, through: :users_products 
+  has_many :products, through: :users_products
+
+  validates :fullname, presence: true
 end

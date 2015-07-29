@@ -23,8 +23,8 @@ html ng-app="app"
       .header__user
         - if user_signed_in?
           .header__user__name
-            | Иванов Иван (
-            a href="" Выход
+            | #{current_user.fullname} (
+            a ng-click="Sign.out()" href="" Выход
             | )
         - else
           a.btn.btn-success.header__user__btn ng-click="showSign='up'" Регистрация
@@ -51,7 +51,7 @@ html ng-app="app"
       .sidebar__price
         af-dimension.disabled ng-model="Search.filter.price_to" options="[{id: 1, title: 'руб'}]" before="'до'"
 
-      a.btn.btn-primary.sidebar__apply Применить
+      a.btn.btn-primary.sidebar__apply ng-click="Search.start(Search.filter)" Применить
 
     ng-view.content
     
