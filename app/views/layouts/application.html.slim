@@ -44,7 +44,7 @@ html ng-app="app"
       .sidebar__cart-no-result ng-hide="Product.inCart.length"
         | Корзина пуста
 
-      .sidebar__cart-result ng-show="Product.inCart.length"
+      .sidebar__cart-result.ng-cloak ng-show="Product.inCart.length"
         | {{'В корзине ' + Product.inCart.length + ' товаров. '}}
         a ng-show="Product.inCart.length" href="" Просмотр
         
