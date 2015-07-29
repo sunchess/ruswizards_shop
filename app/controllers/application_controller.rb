@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
 
   def index
     gon.categories = Category.all
+
+    if current_user
+      gon.product_ids = current_user.product_ids
+    end
+    
     render "layouts/application"
   end
 end

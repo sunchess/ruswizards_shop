@@ -12,4 +12,7 @@
           | {{::product.category_title}}
         .product__price
           | {{::product.price | number}} руб
-        .product__add-to-cart В корзину
+        .product__add-to-cart ng-click="showInput = true" ng-class="{show: showInput}"
+          input type="number" placeholder="Кол-во" ng-model="count"
+          span В корзину
+          i.icon-check ng-click="Product.addToCart(product.id, count); showInput = false; $event.stopPropagation()"

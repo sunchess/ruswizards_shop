@@ -3,18 +3,19 @@
     .sign__close ng-click="showSign=''" &times;
     h3 Вход
   .sign__body
-    .row
-      label.label Эл. почта
-      .input
-        input ng-model="Sign.email" type="email"
-    .row
-      label.label Пароль
-      .input
-        input ng-model="Sign.password" type="password"
-    .row
-      label.checkbox.sign__remember
-        input type="checkbox"
-        .checker
-        | Запомнить
+    form
+      .row
+        label.label Эл. почта
+        .input
+          input ng-model="Sign.email" type="email"
+      .row
+        label.label Пароль
+        .input
+          input ng-model="Sign.password" type="password"
+      .row
+        label.checkbox.sign__remember
+          input type="checkbox"
+          .checker
+          | Запомнить
 
-      button.btn.btn-primary.pull-right ng-click="Sign.in()" Войти
+        button.btn.btn-primary.pull-right ng-click="Sign.in()" Войти

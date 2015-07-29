@@ -3,22 +3,23 @@
     .sign__close ng-click="showSign=''" &times;
     h3 Регистрация
   .sign__body
-    .row
-      label.label Имя
-      .input
-        input ng-model="Sign.fullname" type="text"
-    .row
-      label.label Эл. почта
-      .input
-        input ng-model="Sign.email" type="email"
-    .row
-      label.label Пароль
-      .input
-        input ng-model="Sign.password" type="password"
-    .row
-      label.checkbox.sign__remember
-        input type="checkbox" ng-model="confirmRule"
-        .checker
-        | Согласен с правилами
-    .row
-      button.btn.btn-primary ng-disabled="!confirmRule" ng-click="Sign.up()" Зарегистрироваться
+    form
+      .row
+        label.label Имя
+        .input
+          input ng-model="Sign.fullname" type="text"
+      .row
+        label.label Эл. почта
+        .input
+          input ng-model="Sign.email" type="email"
+      .row
+        label.label Пароль
+        .input
+          input ng-model="Sign.password" type="password"
+      .row
+        label.checkbox.sign__remember
+          input type="checkbox" ng-model="confirmRule"
+          .checker
+          | Согласен с правилами
+      .row
+        button.btn.btn-primary ng-disabled="!confirmRule" ng-click="Sign.up()" Зарегистрироваться

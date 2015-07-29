@@ -86,3 +86,4 @@ gem 'russian'
 gem 'aasm'
 gem 'google_currency'
 gem 'js-routes'
+gem "rolify"

@@ -11,8 +11,15 @@
       display: table-cell
       vertical-align: middle
       padding-left: 30px
-    
+      list-style: none
+      margin: 0
+
     &__item
+      padding: 0
+      display: inline-block
+      position: relative
+    
+    &__link
       font-weight: 700
       color: #333
       font-size: 14px
@@ -24,13 +31,31 @@
       &:hover
         color: #989898
         
+    &__add-product
+      position: absolute
+      font-size: 12px
+      font-weight: bold
+      text-transform: none
+      color: green
+      left: 0
+      top: 20px
+      text-decoration: none
+      
+      &:hover
+        opacity: .8
+        
   &__user
     position: absolute
     right: 30px
     top: 25px
+    display: table
     
     &__name
-      padding-top: 10px
+      max-width: 185px
+      height: 44px
+      vertical-align: middle
+      display: table-cell
+      font-size: 14px
       
     &__btn
       margin-left: 10px

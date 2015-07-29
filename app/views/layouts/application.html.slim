@@ -11,10 +11,16 @@ html ng-app="app"
     header.header
       nav.nav
         ul.nav__list
-          a.nav__item href="" Главная
-          a.nav__item href="" Каталог товаров
-          a.nav__item href="" Доставка
-          a.nav__item href="" Контакты
+          li.nav__item
+            a.nav__link href="" Главная
+          li.nav__item
+            a.nav__link href="" Каталог товаров
+            - if user_signed_in? and current_user.has_role? :admin
+              a.nav__add-product href="" Управление каталогом
+          li.nav__item
+            a.nav__link href="" Доставка
+          li.nav__item
+            a.nav__link href="" Контакты
 
       .text-search
         i.icon-search
@@ -35,7 +41,13 @@ html ng-app="app"
 
     aside.sidebar
       .sidebar__title Корзина
-      .sidebar__cart-no-result Корзина пуста
+      .sidebar__cart-no-result ng-hide="Product.inCart.length"
+        | Корзина пуста
+
+      .sidebar__cart-result ng-show="Product.inCart.length"
+        | {{'В корзине ' + Product.inCart.length + ' товаров. '}}
+        a ng-show="Product.inCart.length" href="" Просмотр
+        
 
       .sidebar__title Категория
       .sidebar__category ng-repeat="category in categories"
