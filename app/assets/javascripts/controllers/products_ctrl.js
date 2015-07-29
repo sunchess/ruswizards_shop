@@ -4,7 +4,7 @@ app.controller('ProductsCtrl', ['$scope', '$product', 'Search', 'Product', funct
   $scope.$watch(function () {
     return Search.filter
   }, function (params) {
-    Search.start(params)
+    Search.start({filter: params})
   }, true)
 
 }]);

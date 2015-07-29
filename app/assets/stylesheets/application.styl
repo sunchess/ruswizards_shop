@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require normalize
+ *= require angular-notify
  *= require_tree .
  *= require_self
  */
@@ -140,14 +141,18 @@ input[type="number"]
   -ms-user-select: none
   user-select: none
 
+  &.disabled
+    opacity: .7
+    cursor: default
+
   btn($color)
     background: $color
     color: #2B2B2B
 
-    &:hover
+    &:not(.disabled):hover
       background: lighten($color, 15%)
 
-    &:active
+    &:not(.disabled):active
       -moz-box-shadow: inset 0 1px 3px -1px rgba(0, 0, 0, 0.5)
       -webkit-box-shadow: inset 0 1px 3px -1px rgba(0, 0, 0, 0.5)
       box-shadow: inset 0 1px 3px -1px rgba(0, 0, 0, 0.5)

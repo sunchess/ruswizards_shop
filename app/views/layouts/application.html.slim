@@ -27,30 +27,11 @@ html ng-app="app"
             a href="" Выход
             | )
         - else
-          a.btn.btn-success.header__user__btn Регистрация
-          a.btn.btn-primary.header__user__btn ng-click="isShowSignIn=!isShowSignIn" Вход
+          a.btn.btn-success.header__user__btn ng-click="showSign='up'" Регистрация
+          a.btn.btn-primary.header__user__btn ng-click="showSign='in'" Вход
 
-    .sign ng-class="{show: isShowSignIn}"
-      .sign__header
-        .sign__close &times;
-        h3 Вход
-      .sign__body
-        form
-          .row
-            label.label Эл. почта
-            .input
-              input type="text"
-          .row
-            label.label Пароль
-            .input
-              input type="password"
-          .row
-            label.checkbox.sign__remember
-              input type="checkbox"
-              .checker
-              | Запомнить
-
-            input.btn.btn-primary.pull-right value="Войти" type="submit"
+    = render "sign/in"
+    = render "sign/up"
 
     aside.sidebar
       .sidebar__title Корзина
