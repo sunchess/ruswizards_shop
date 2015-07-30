@@ -9,6 +9,14 @@ class ApplicationController < ActionController::Base
 
   def index
     gon.categories = Category.all
+    gon.user = {}
+    
+    if current_user
+      gon.user = {
+        info: current_user.as_json(only: [:fullname]),
+        is_admin: current_user.has_role?(:admin)
+      }
+    end
     
     render "layouts/application"
   end

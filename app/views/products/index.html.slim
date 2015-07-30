@@ -4,8 +4,8 @@ aside.sidebar
     | Корзина пуста
 
   .sidebar__cart-result.ng-cloak ng-show="Product.inCart.length"
-    | В корзине {{Product.countInCart | plur:['товар', 'товара', 'товаров']}}. 
-  a href="/carts" ng-show="Product.inCart.length" Просмотр
+    | {{Product.countInCart | plur:['товар', 'товара', 'товаров']}} на сумму {{Product.totalCartPrice | number}} руб.
+  a href="/carts?tab=cart" ng-show="Product.inCart.length" Просмотр
     
 
   .sidebar__title Категория

@@ -26,9 +26,10 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
     } else {
       Product.inCart.push(product);
     }
-    
-    localStorage.setItem("cart", JSON.stringify(Product.inCart));
     $http.post(Routes.carts_path(), {id: product.id, count: count})
+
+    if (!gon.user)
+      localStorage.setItem("cart", JSON.stringify(Product.inCart));
   }
 
   Product.deleteFromCart = function ($index, id) {
@@ -40,10 +41,18 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
     }
   }
 
-  Product.updateCart = function () {
-    $http.get(Routes.carts_path({format: 'json'}))
+  Product.resetCart = function () {
+    $http.post(Routes.reset_carts_path(), {products: Product.inCart})
+  }
+
+  Product.updateCart = function (tab) {
+    $http.get(Routes.carts_path({format: 'json'}), {params: {tab: tab}})
       .success(function (res) {
-        Product.inCart = res.length ? res : JSON.parse(localStorage.getItem("cart"));
+        Product.inCart = res.length ? res : JSON.parse(localStorage.getItem("cart") || "[]");
+        if (!res.length && Product.inCart.length && gon.user) {
+          Product.resetCart();
+          localStorage.setItem("cart", "[]");
+        }
       })
   }
 

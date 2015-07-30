@@ -17,6 +17,10 @@ class ProductsController < ApplicationController
     @products = @products.includes(:category, :photos)
   end
 
+  def manage_catalog
+
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show

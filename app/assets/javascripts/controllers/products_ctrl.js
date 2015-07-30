@@ -1,4 +1,4 @@
-app.controller('ProductsCtrl', ['$scope', '$product', 'Search', 'Product', function ($scope, $product, Search, Product) {
+app.controller('ProductsCtrl', ['$scope', '$http', 'Search', function ($scope, $http, Search) {
   var products = this;
 
   $scope.$watch(function () {
@@ -7,4 +7,11 @@ app.controller('ProductsCtrl', ['$scope', '$product', 'Search', 'Product', funct
     Search.start({filter: params})
   }, true)
 
+  products.getCategories = function () {
+    $http.get(Routes.categories_path())
+      .success(function (res) {
+        products.categories = res;
+      })
+  }
+  
 }]);

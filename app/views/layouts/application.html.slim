@@ -16,11 +16,11 @@ html ng-app="app"
           li.nav__item
             a.nav__link href="/" Каталог товаров
             - if user_signed_in? and current_user.has_role? :admin
-              a.nav__add-product href="" Управление каталогом
+              a.nav__add-product href="/manage-catalog" Управление каталогом
           li.nav__item
-            a.nav__link href="" Доставка
+            a.nav__link href="/delivery" Доставка
           li.nav__item
-            a.nav__link href="" Контакты
+            a.nav__link href="/contacts" Контакты
 
       .text-search
         i.icon-search

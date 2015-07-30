@@ -8,9 +8,22 @@ Rails.application.routes.draw do
 
 
   scope :ajax do
+    scope :pages do
+      get '/contacts' => 'pages#contacts'
+      get '/delivery' => 'pages#delivery'
+    end
+
     resources :orders
-    resources :carts
-    resources :products
+    
+    resources :carts do
+      post '/reset' => 'carts#reset', on: :collection
+    end
+
+    resources :products do
+      get '/manage-catalog' => 'products#manage_catalog', on: :collection
+    end
+
+    resources :categories
   end
 
   get '/*path' => 'application#index'
