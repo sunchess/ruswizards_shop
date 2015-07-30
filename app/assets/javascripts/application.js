@@ -31,4 +31,6 @@ app.run(['$rootScope', 'Search', 'Product', 'Sign', function ($rootScope, Search
   $rootScope.Search = Search;
   $rootScope.Product = Product;
   $rootScope.Sign = Sign;
+
+  Product.updateCart();
 }])
