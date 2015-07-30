@@ -1,8 +1,13 @@
 class CartsController < ApplicationController
+  def index
+    @products = current_user.products.includes(:category, :photos, :users_products)
+  end
+  
   def create
-    params[:product_ids].each do |product_id|
-      current_user.products << Product.find_by(id: product_id)
-    end
+    ap params
+    product = UsersProduct.find_or_create_by(user_id: current_user.id, product_id: params[:id])
+    product.count += params[:count]
+    product.save
 
     if current_user.save
       render json: {msg: "Товары успешно добавлены в корзину"}

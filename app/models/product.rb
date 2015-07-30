@@ -29,4 +29,8 @@ class Product < ActiveRecord::Base
 
     result
   end
+
+  def count
+    users_products.first.count
+  end
 end

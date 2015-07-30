@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     gon.categories = Category.all
 
     if current_user
-      gon.product_ids = current_user.product_ids
+      gon.product_ids = current_user.users_products.as_json(only: [:count, :id])
     end
     
     render "layouts/application"

@@ -12,9 +12,9 @@ html ng-app="app"
       nav.nav
         ul.nav__list
           li.nav__item
-            a.nav__link href="" Главная
+            a.nav__link href="/" Главная
           li.nav__item
-            a.nav__link href="" Каталог товаров
+            a.nav__link href="/" Каталог товаров
             - if user_signed_in? and current_user.has_role? :admin
               a.nav__add-product href="" Управление каталогом
           li.nav__item
@@ -38,32 +38,6 @@ html ng-app="app"
 
     = render "sign/in"
     = render "sign/up"
-
-    aside.sidebar
-      .sidebar__title Корзина
-      .sidebar__cart-no-result ng-hide="Product.inCart.length"
-        | Корзина пуста
-
-      .sidebar__cart-result.ng-cloak ng-show="Product.inCart.length"
-        | {{'В корзине ' + Product.inCart.length + ' товаров. '}}
-        a ng-show="Product.inCart.length" href="" Просмотр
-        
-
-      .sidebar__title Категория
-      .sidebar__category ng-repeat="category in categories"
-        label.checkbox
-          input type="checkbox" ng-model="Search.filter.category_id[category.id]"
-          .checker
-          | {{::category.title}}
-
-      .sidebar__title Цена
-      .sidebar__price
-        af-dimension.disabled ng-model="Search.filter.price_from" options="[{id: 1, title: 'руб'}]" before="'от'"
-      .sep –
-      .sidebar__price
-        af-dimension.disabled ng-model="Search.filter.price_to" options="[{id: 1, title: 'руб'}]" before="'до'"
-
-      a.btn.btn-primary.sidebar__apply ng-click="Search.start(Search.filter)" Применить
 
     ng-view.content
     

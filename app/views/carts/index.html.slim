@@ -1,0 +1,29 @@
+.carts
+  .carts-container
+    h2 Корзина
+    table.table
+      thead
+        tr
+          th Наименование товара
+          th.w0 Количество
+          th.w0 Стоимость
+          th
+      tbody
+        tr ng-repeat="product in carts.products"
+          td
+            | {{product.title}}
+          td.w0
+            input.carts__count type="number" ng-model="product.count" min="1"
+          td.w0
+            | {{product.price | number}} руб
+          td.w0
+            a.btn.btn-danger ng-click="carts.products.splice($index, 1)" Удалить
+      tfoot
+        tr
+          td.align-right colspan="4"
+            .row
+              b Итого к оплате: 
+              span
+                | {{carts.totalPrice}} руб
+            .row
+              a.btn.btn-success Оформить заказ

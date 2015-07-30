@@ -1,3 +1,29 @@
+aside.sidebar
+  .sidebar__title Корзина
+  .sidebar__cart-no-result ng-hide="Product.inCart.length"
+    | Корзина пуста
+
+  .sidebar__cart-result.ng-cloak ng-show="Product.inCart.length"
+    | {{'В корзине ' + Product.countInCart + ' товаров. '}}
+    a href="/carts" ng-show="Product.inCart.length" Просмотр
+    
+
+  .sidebar__title Категория
+  .sidebar__category ng-repeat="category in categories"
+    label.checkbox
+      input type="checkbox" ng-model="Search.filter.category_id[category.id]"
+      .checker
+      | {{::category.title}}
+
+  .sidebar__title Цена
+  .sidebar__price
+    af-dimension.disabled ng-model="Search.filter.price_from" options="[{id: 1, title: 'руб'}]" before="'от'"
+  .sep –
+  .sidebar__price
+    af-dimension.disabled ng-model="Search.filter.price_to" options="[{id: 1, title: 'руб'}]" before="'до'"
+
+  a.btn.btn-primary.sidebar__apply ng-click="Search.start(Search.filter)" Применить
+
 .products
   .products__count Найдено 209 результатов
 
