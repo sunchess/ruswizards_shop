@@ -4,8 +4,8 @@ aside.sidebar
     | Корзина пуста
 
   .sidebar__cart-result.ng-cloak ng-show="Product.inCart.length"
-    | {{'В корзине ' + Product.countInCart + ' товаров. '}}
-    a href="/carts" ng-show="Product.inCart.length" Просмотр
+    | В корзине {{Product.countInCart | plur:['товар', 'товара', 'товаров']}}. 
+  a href="/carts" ng-show="Product.inCart.length" Просмотр
     
 
   .sidebar__title Категория
@@ -25,7 +25,7 @@ aside.sidebar
   a.btn.btn-primary.sidebar__apply ng-click="Search.start(Search.filter)" Применить
 
 .products
-  .products__count Найдено 209 результатов
+  .products__count Найдено {{Product.list.length | plur:['товар', 'товара', 'товаров']}}
 
   .products__list
     .product ng-repeat="product in Product.list"

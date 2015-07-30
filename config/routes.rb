@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
 
   scope :ajax do
+    resources :orders
     resources :carts
     resources :products
   end

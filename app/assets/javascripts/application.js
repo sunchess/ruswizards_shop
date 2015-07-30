@@ -26,11 +26,13 @@
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource', 'ngNotify']);
 
 
-app.run(['$rootScope', 'Search', 'Product', 'Sign', function ($rootScope, Search, Product, Sign) {
+app.run(['$rootScope', 'Search', 'Product', 'Sign', 'pluralize', function ($rootScope, Search, Product, Sign, pluralize) {
   $rootScope.categories = gon.categories;
   $rootScope.Search = Search;
   $rootScope.Product = Product;
   $rootScope.Sign = Sign;
+
+  $rootScope.pluralize = pluralize;
 
   Product.updateCart();
 }])
