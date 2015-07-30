@@ -33,6 +33,4 @@ app.run(['$rootScope', 'Search', 'Product', 'Sign', 'pluralize', function ($root
   $rootScope.Sign = Sign;
 
   $rootScope.pluralize = pluralize;
-
-  Product.updateCart();
 }])

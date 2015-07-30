@@ -29,7 +29,7 @@ aside.sidebar
 
   .products__list
     .product ng-repeat="product in Product.list"
-      .product__body
+      a.product__body ng-href="/products/{{product.id}}"
         img.product__image ng-src="{{product.photos[0].photo.url}}"
       .product__footer
         .product__title

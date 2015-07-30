@@ -9,7 +9,7 @@ class CartsController < ApplicationController
   end
   
   def create
-    product = UsersProduct.find_or_create_by(user_id: current_user.id, product_id: params[:id])
+    product = UsersProduct.where('order_id IS NULL').where(user_id: current_user.id, product_id: params[:id]).first_or_create
     product.count += params[:count]
     product.save
     render json: {msg: "Товары успешно добавлены в корзину"}

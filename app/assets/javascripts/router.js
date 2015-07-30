@@ -5,6 +5,11 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ProductsCtrl as products',
       reloadOnSearch: false
     })
+    .when('/products/:id', {
+      templateUrl: Routes.product_path(0),
+      controller: 'ProductsCtrl as products',
+      reloadOnSearch: false
+    })
     .when('/carts', {
       templateUrl: Routes.carts_path(),
       controller: 'CartsCtrl as carts',

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
@@ -24,6 +24,13 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    respond_to do |format|
+      format.html {render "products/show"}
+      format.json {
+        product = Product.where(id: params[:id]).includes(:category, :photos).first
+        render json: product.as_json(include: [:category, :photos])
+      }
+    end
   end
 
   # GET /products/new

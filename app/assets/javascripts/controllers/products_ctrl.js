@@ -1,4 +1,4 @@
-app.controller('ProductsCtrl', ['$scope', '$http', 'Search', function ($scope, $http, Search) {
+app.controller('ProductsCtrl', ['$scope', '$http', 'Search', '$routeParams', '$product', 'Product', function ($scope, $http, Search, $routeParams, $product, Product) {
   var products = this;
 
   $scope.$watch(function () {
@@ -12,6 +12,13 @@ app.controller('ProductsCtrl', ['$scope', '$http', 'Search', function ($scope, $
       .success(function (res) {
         products.categories = res;
       })
+  }
+
+
+  if ($routeParams.id) {
+    products.product = $product.get({id: $routeParams.id});
+  } else {
+    Product.updateCart('cart');
   }
   
 }]);

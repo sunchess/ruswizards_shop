@@ -1,0 +1,16 @@
+.container
+  h1
+    | {{products.product.title}}
+  
+  .product-page
+    img.pull-left.product-page__image ng-src="{{products.product.photos[0].photo.url}}" width="210"
+    
+    .product-page__info
+      .row
+        label.label Описание
+        div
+          | {{products.product.title.description || 'Описания нет'}}
+      .row
+        label.label Цена
+        div
+          | {{products.product.price | number}} руб

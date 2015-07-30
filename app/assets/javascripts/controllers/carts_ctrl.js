@@ -15,6 +15,7 @@ app.controller('CartsCtrl', ['$scope', '$http', 'Product', '$location', function
     $http.post(Routes.orders_path(), {order: order})
       .success(function () {
         carts.showAddressForm = false
+        Product.updateCart($location.search().tab);
       })
   }
 
