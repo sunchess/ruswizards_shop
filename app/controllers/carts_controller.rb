@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   def index
-    @products = current_user.products.includes(:category, :photos, :users_products)
+    @products = current_user.products.includes(:category, :photos, :users_products) rescue []
   end
   
   def create

@@ -1,6 +1,5 @@
 app.service('Product', ['$product', '$http', '$rootScope', function ($product, $http, $rootScope) {
   var Product = this;
-  Product.inCart = JSON.parse(localStorage.getItem("cart")) || [];
 
   $rootScope.$watch(function () {
     return Product.inCart
@@ -44,7 +43,7 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
   Product.updateCart = function () {
     $http.get(Routes.carts_path({format: 'json'}))
       .success(function (res) {
-        Product.inCart = res;
+        Product.inCart = res.length ? res : JSON.parse(localStorage.getItem("cart"));
       })
   }
 
