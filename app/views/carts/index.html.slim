@@ -1,29 +1,50 @@
 .carts
   .carts-container
-    h2 Корзина
-    table.table
-      thead
-        tr
-          th Наименование товара
-          th.w0 Количество
-          th.w0 Стоимость
-          th
-      tbody
-        tr ng-repeat="product in carts.products"
-          td
-            | {{product.title}}
-          td.w0
-            input.carts__count type="number" ng-model="product.count" min="1"
-          td.w0
-            | {{product.price | number}} руб
-          td.w0
-            a.btn.btn-danger ng-click="carts.products.splice($index, 1)" Удалить
-      tfoot
-        tr
-          td.align-right colspan="4"
-            .row
-              b Итого к оплате: 
-              span
-                | {{carts.totalPrice}} руб
-            .row
-              a.btn.btn-success Оформить заказ
+    div  ng-class="{blur: showAddressForm}"
+      h2 Корзина
+      table.table
+        thead
+          tr
+            th Наименование товара
+            th.w0 Количество
+            th.w0 Стоимость
+            th
+        tbody
+          tr ng-repeat="product in Product.inCart"
+            td
+              | {{product.title}}
+            td.w0
+              input.carts__count type="number" ng-model="product.count" min="1"
+            td.w0
+              | {{product.price * product.count | number}} руб
+            td.w0
+              a.btn.btn-danger ng-click="Product.deleteFromCart($index, product.id)" Удалить
+        tfoot
+          tr
+            td.align-right colspan="4"
+              .row
+                b Итого к оплате: 
+                span
+                  | {{Product.totalCartPrice}} руб
+              .row
+                a.btn.btn-success href="#contacts" ng-click="showAddressForm = true" Оформить заказ
+    .overlay ng-show="showAddressForm"
+      .carts__contact.modal
+        .modal__close ng-click="showAddressForm = false" &times;
+        h2 Контактные данные
+        form
+          .row
+            label.label Адрес
+            label.input
+              input type="text"
+          .row
+            label.label Телефон
+            label.input
+              input type="text"
+          .row
+            label.label Контактное лицо
+            label.input
+              input type="text"
+          .clearfix
+            button.btn.btn-success.pull-right Заказать
+            button.btn.btn-default.pull-right ng-click="showAddressForm = false" Отмена

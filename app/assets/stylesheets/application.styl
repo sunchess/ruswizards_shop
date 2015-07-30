@@ -57,6 +57,9 @@ h3
   letter-spacing: 1px
   margin: 10px 0 20px 0
 
+h2
+  margin-top: 5px
+
 a
   color: rgb(3, 169, 244)
     
@@ -140,6 +143,7 @@ input[type="number"]
   -moz-user-select: none
   -ms-user-select: none
   user-select: none
+  text-decoration: none
 
   &:disabled
     opacity: .7
@@ -216,3 +220,37 @@ label.label
   
 .align-right
   text-align: right
+  
+.modal
+  position: absolute
+  z-index: 1000
+  top: 100px
+  left: 50%
+  background: white
+  padding: 15px
+  box-shadow: 1px 1px 4px rgba(0,0,0,.2)
+  
+  &__close
+    font-size: 32px
+    font-weight: lighter
+    position: absolute
+    right: 10px
+    top: 0px
+    cursor: pointer
+    
+    &:hover
+      color: red
+
+.blur
+  filter: blur(3px)
+  -webkit-filter: blur(3px)
+  -moz-filter: blur(3px)
+  -o-filter: blur(3px)
+  -ms-filter: blur(3px)
+
+.overlay
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0

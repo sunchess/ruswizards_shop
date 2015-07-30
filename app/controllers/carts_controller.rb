@@ -4,7 +4,6 @@ class CartsController < ApplicationController
   end
   
   def create
-    ap params
     product = UsersProduct.find_or_create_by(user_id: current_user.id, product_id: params[:id])
     product.count += params[:count]
     product.save
@@ -17,7 +16,7 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    current_user.products.delete Product.find_by(id: params[:product_id])
+    current_user.products.delete Product.find_by(id: params[:id])
 
     if current_user.save
       render json: {msg: "Товар успешно удален из корзины"}

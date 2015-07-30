@@ -1,31 +1,50 @@
 app.service('Product', ['$product', '$http', '$rootScope', function ($product, $http, $rootScope) {
   var Product = this;
-
-  Product.inCart = gon.product_ids || JSON.parse(localStorage.getItem("cart")) || [];
+  Product.inCart = JSON.parse(localStorage.getItem("cart")) || [];
 
   $rootScope.$watch(function () {
     return Product.inCart
   }, function (val) {
-    if (_.isArray(val))
-      Product.countInCart = _.reduce(val, function(memo, num){ return memo+ num.count; }, 0)
-  }, true)
+    if (val && val.length) {
+      Product.countInCart = 0;
+      Product.totalCartPrice = 0;
+      _.each(val, function (product) {
+        Product.countInCart += product.count;
+        Product.totalCartPrice += product.price * product.count;
+      })
+    }
+  }, true);
 
-  Product.addToCart = function (id, count) {
-    Product.inCart.push({id: id, count: count});
+  Product.addToCart = function (product, count) {
+    product.count = count;
+    var index = _.findIndex(Product.inCart, function (el) {
+      return el.id == product.id
+    });
+    
+    if (index!=undefined) {
+      Product.inCart[index].count += count;
+    } else {
+      Product.inCart.push(product);
+    }
     
     localStorage.setItem("cart", JSON.stringify(Product.inCart));
-    $http.post(Routes.carts_path(), {id: id, count: count})
+    $http.post(Routes.carts_path(), {id: product.id, count: count})
   }
 
-  Product.deleteToCart = function (id, count) {
-    var product_ids = []
-    _.each(_.range(count), function () {
-      product_ids.splice(id, 1)
-      Product.inCart.splice(id, 1)
-    });
-    localStorage.setItem("cart", JSON.stringify(Product.inCart));
+  Product.deleteFromCart = function ($index, id) {
+    if (confirm("Вы уверены?")) {
+      $http.delete(Routes.cart_path(id))
+        .success(function () {
+          Product.inCart.splice($index, 1);
+        })
+    }
+  }
 
-    $http.delete(Routes.users_cart_path(), {product_ids: product_ids})
+  Product.updateCart = function () {
+    $http.get(Routes.carts_path({format: 'json'}))
+      .success(function (res) {
+        Product.inCart = res;
+      })
   }
 
 }]);

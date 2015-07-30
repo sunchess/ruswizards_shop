@@ -9,10 +9,6 @@ class ApplicationController < ActionController::Base
 
   def index
     gon.categories = Category.all
-
-    if current_user
-      gon.product_ids = current_user.users_products.as_json(only: [:count, :id])
-    end
     
     render "layouts/application"
   end
