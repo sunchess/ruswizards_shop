@@ -21,7 +21,8 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
       return el.id == product.id
     });
     
-    if (index!=undefined) {
+    if (index!=-1) {
+      console.log(index)
       Product.inCart[index].count += count;
     } else {
       Product.inCart.push(product);
