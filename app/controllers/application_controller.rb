@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!, except: [:index]
+  before_filter :user_needed, except: [:index]
 
   layout :false
 
@@ -20,4 +20,11 @@ class ApplicationController < ActionController::Base
     
     render "layouts/application"
   end
+
+  private
+    def user_needed
+      unless current_user
+        render :json => {'msg' => 'Вы не авторизованы'}, :status => 401
+      end
+    end
 end

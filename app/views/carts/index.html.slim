@@ -3,7 +3,9 @@
     div  ng-class="{blur: carts.showAddressForm}"
       h2
         a.tab href="/carts?tab=cart" ng-class="{active: carts.tab=='cart'}" Корзина
-        a.tab href="/carts?tab=orders" ng-class="{active: carts.tab=='orders'}" Заказы
+
+        - if user_signed_in?
+          a.tab href="/carts?tab=orders" ng-class="{active: carts.tab=='orders'}" Заказы
       div ng-hide="Product.inCart.length" В корзине пусто
       table.table ng-show="Product.inCart.length"
         thead

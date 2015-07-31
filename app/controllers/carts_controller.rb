@@ -1,11 +1,7 @@
 class CartsController < ApplicationController
   def index
-    @products = current_user.products.includes(:category, :photos, :users_products)
-    if params[:tab] == 'cart'
-      @products = @products.where('users_products.order_id IS NULL')
-    elsif params[:tab] == 'orders'
-      @products = @products.where('users_products.order_id IS NOT NULL')
-    end
+    is_not = params[:tab] == 'orders' ? 'NOT' : ''
+    @products = current_user.products.includes(:category, :photos, :users_products).where("users_products.order_id IS #{is_not} NULL")
   end
   
   def create
