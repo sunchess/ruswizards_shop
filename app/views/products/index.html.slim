@@ -39,6 +39,6 @@ aside.sidebar
         .product__price
           | {{::product.price | number}} руб
         .product__add-to-cart ng-click="showInput = true" ng-class="{show: showInput}"
-          input type="number" placeholder="Кол-во" ng-model="count"
+          input type="number" placeholder="Кол-во" ng-model="count" min="0"
           span В корзину
           i.icon-check ng-click="Product.addToCart(product, count); showInput = false; $event.stopPropagation()"

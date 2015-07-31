@@ -33,7 +33,7 @@
                 b Итого к оплате: 
                 span
                   | {{Product.totalCartPrice || 0}} руб
-              .row
+              - if user_signed_in?
                 a.btn.btn-success href="#contacts" ng-click="carts.showAddressForm = true" Оформить заказ
     .overlay ng-show="carts.showAddressForm"
       .carts__contact.modal

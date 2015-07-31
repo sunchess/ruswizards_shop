@@ -18,7 +18,7 @@ app.controller('ProductsCtrl', ['$scope', '$http', 'Search', '$routeParams', '$p
   if ($routeParams.id) {
     products.product = $product.get({id: $routeParams.id});
   } else {
-    Product.updateCart('cart');
+    Product.getCart();
   }
   
 }]);

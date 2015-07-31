@@ -31,20 +31,17 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
     }
   }
 
-  Product.resetCart = function () {
-    $http.post(Routes.reset_carts_path(), {products: Product.inCart})
-      .success(function () {
-        localStorage.setItem("cart", "[]");
+  Product.getCart = function () {
+    $http.get(Routes.carts_path({format: 'json'}))
+      .success(function (res) {
+          Product.inCart = res;
       })
   }
 
-  Product.updateCart = function (tab) {
-    $http.get(Routes.carts_path({format: 'json'}), {params: {tab: tab}})
+  Product.getOrders = function () {
+    $http.get(Routes.orders_path({format: 'json'}))
       .success(function (res) {
-        Product.inCart = res.length ? res : JSON.parse(localStorage.getItem("cart") || "[]");
-        if (!res.length && Product.inCart.length && gon.user) {
-          Product.resetCart();
-        }
+          Product.inCart = res;
       })
   }
 

@@ -3,8 +3,6 @@ app.controller('CartsCtrl', ['$scope', '$http', 'Product', '$location', function
 
   carts.order = {};
 
-  Product.updateCart();
-
   carts.createOrder = function () {
     var order = {
       address: carts.order.address,
@@ -15,16 +13,18 @@ app.controller('CartsCtrl', ['$scope', '$http', 'Product', '$location', function
     $http.post(Routes.orders_path(), {order: order})
       .success(function () {
         carts.showAddressForm = false
-        Product.updateCart($location.search().tab);
+        Product.getCart();
       })
   }
 
   $scope.$watch(function () {
     return $location.search().tab
   }, function (tab) {
-    if (tab) {
-      carts.tab = tab;
-      Product.updateCart(tab);
+    carts.tab = tab;
+    if (tab == 'cart') {
+      Product.getCart();
+    } else if (tab == 'orders') {
+      Product.getOrders();
     }
   })
 }])
