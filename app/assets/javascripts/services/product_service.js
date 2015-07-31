@@ -8,37 +8,26 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
       Product.countInCart = 0;
       Product.totalCartPrice = 0;
       _.each(val, function (product) {
-        Product.countInCart += product.count;
-        Product.totalCartPrice += product.price * product.count;
+        count = parseInt(product.count);
+        Product.countInCart += count;
+        Product.totalCartPrice += product.price * count;
       })
     }
   }, true);
 
   Product.addToCart = function (product, count) {
-    product.count = count;
-    var index = _.findIndex(Product.inCart, function (el) {
-      return el.id == product.id
-    });
-    
-    if (index!=-1) {
-      Product.inCart[index].count += count;
-    } else {
-      Product.inCart.push(product);
-    }
     $http.post(Routes.carts_path(), {id: product.id, count: count})
-
-    if (!gon.user.info){
-      localStorage.setItem("cart", JSON.stringify(Product.inCart));
-    }
+      .success(function (res) {
+        Product.inCart = res;
+      })
   }
 
   Product.deleteFromCart = function ($index, id) {
     if (confirm("Вы уверены?")) {
-      Product.inCart.splice($index, 1);
-      if (gon.user.info)
-        $http.delete(Routes.cart_path(id));
-      else
-        localStorage.setItem("cart", Product.inCart)
+      $http.delete(Routes.cart_path(id))
+        .success(function (res) {
+          Product.inCart = res.user_products;
+        })
     }
   }
 
@@ -57,6 +46,12 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
           Product.resetCart();
         }
       })
+  }
+
+  Product.updateCount = function (id, count) {
+    $http.put(Routes.cart_path(id), function (res) {
+      // body...
+    })
   }
 
 }]);

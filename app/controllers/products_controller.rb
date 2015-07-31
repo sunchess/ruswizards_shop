@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
 
+  skip_before_action :user_needed, only: [:index, :manage_catalog, :show]
+
+
   # GET /products
   # GET /products.json
   def index
