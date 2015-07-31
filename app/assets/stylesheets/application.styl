@@ -136,6 +136,7 @@ input[type="number"]
   height: 38px
   line-height: 37px
   padding: 0 20px
+  font-size: 16px
   text-align: center
   border-radius: 3px
   border: none
@@ -149,6 +150,12 @@ input[type="number"]
   -ms-user-select: none
   user-select: none
   text-decoration: none
+  
+  &-sm
+    padding: 0 10px
+    fint-size: 14px
+    height: 30px
+    line-height: 29px
 
   &:disabled
     opacity: .7
@@ -224,7 +231,10 @@ label.label
   white-space: nowrap
   
 .align-right
-  text-align: right
+  text-align: right  
+
+.align-middle
+  vertical-align: middle
   
 .modal
   position: absolute
@@ -269,4 +279,7 @@ label.label
   &.active
     color: #333
     border: none
+
+.col-1-2
+  width: 50% !important
     

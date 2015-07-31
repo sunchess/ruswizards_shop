@@ -1,0 +1,12 @@
+form.manage__category__form
+  .row
+    label.label Название
+    .input
+      input type="text" ng-model="categories.form.title"
+  .row
+    label.label Акция
+    .input
+      input.col-1-2 ng-model="categories.form.dscount_count" type="text" placeholder="От ... штук"
+      input.col-1-2  ng-model="categories.form.discount_procent" type="text" placeholder="Скидка, %"
+  .row
+    a.btn.btn-success ng-click="categories.create()" Сохранить

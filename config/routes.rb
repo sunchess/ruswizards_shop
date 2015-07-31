@@ -15,13 +15,9 @@ Rails.application.routes.draw do
 
     resources :orders
     
-    resources :carts do
-      post '/reset' => 'carts#reset', on: :collection
-    end
+    resources :carts
 
-    resources :products do
-      get '/manage-catalog' => 'products#manage_catalog', on: :collection
-    end
+    resources :products
 
     resources :categories
   end

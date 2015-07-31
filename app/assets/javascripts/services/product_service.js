@@ -51,6 +51,13 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
     })
   }
 
+  Product.getCategories = function (withProducts) {
+    $http.get(Routes.categories_path({format: "json"}), {params: {with_products: withProducts}})
+      .success(function (res) {
+        Product.categories = res;
+      })
+  }
+
 }]);
 
 app.factory('$product', ['$resource', function ($resource) {

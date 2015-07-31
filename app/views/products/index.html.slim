@@ -9,7 +9,7 @@ aside.sidebar
     
 
   .sidebar__title Категория
-  .sidebar__category ng-repeat="category in categories"
+  .sidebar__category ng-repeat="category in Product.categories"
     label.checkbox
       input type="checkbox" ng-model="Search.filter.category_id[category.id]"
       .checker

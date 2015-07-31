@@ -24,9 +24,19 @@ app.config(['$routeProvider', function ($routeProvider) {
 
   if (gon.user.is_admin)
     $routeProvider
-      .when('/manage-catalog', {
-        templateUrl: Routes.manage_catalog_products_path(),
-        controller: 'ProductsCtrl as products',
+      .when('/categories', {
+        templateUrl: Routes.categories_path(),
+        controller: 'CategoriesCtrl as categories',
+        reloadOnSearch: false
+      })
+      .when('/category/new', {
+        templateUrl: Routes.new_category_path(),
+        controller: 'CategoriesCtrl as categories',
+        reloadOnSearch: false
+      })
+      .when('/categories/:id/edit', {
+        templateUrl: Routes.edit_category_path('id'),
+        controller: 'CategoriesCtrl as categories',
         reloadOnSearch: false
       })
 
