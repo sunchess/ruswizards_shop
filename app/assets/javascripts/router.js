@@ -5,8 +5,13 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ProductsCtrl as products',
       reloadOnSearch: false
     })
-    .when('/products/:id', {
+    .when('/products/:product_id', {
       templateUrl: Routes.product_path(0),
+      controller: 'ProductsCtrl as products',
+      reloadOnSearch: false
+    })
+    .when('/products/:product_id/edit', {
+      templateUrl: Routes.edit_product_path(0),
       controller: 'ProductsCtrl as products',
       reloadOnSearch: false
     })
@@ -34,9 +39,14 @@ app.config(['$routeProvider', function ($routeProvider) {
         controller: 'CategoriesCtrl as categories',
         reloadOnSearch: false
       })
-      .when('/categories/:id/edit', {
+      .when('/categories/:category_id/edit', {
         templateUrl: Routes.edit_category_path('id'),
         controller: 'CategoriesCtrl as categories',
+        reloadOnSearch: false
+      })
+      .when('/categories/:category_id/products/new', {
+        templateUrl: Routes.new_product_path(),
+        controller: 'ProductsCtrl as products',
         reloadOnSearch: false
       })
 

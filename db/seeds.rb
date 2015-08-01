@@ -45,9 +45,8 @@ json_categories.each do |json_category|
     img = node.css('.b-product__img img')[0]["src"].gsub('small', 'mid').gsub('s.', '.')
     product = Product.where(title: title, price: price, category_id: category.id).first_or_create
 
-    photo = Photo.new
-    photo.remote_photo_url = img
-    product.photos << photo
+    product.remote_photo_url = img
+    product.save
 
     ap title
     ap price

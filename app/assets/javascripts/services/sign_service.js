@@ -4,7 +4,8 @@ app.service('Sign', ['$http', function ($http) {
   Sign.in = function () {
     var params = {
       email: Sign.email,
-      password: Sign.password
+      password: Sign.password,
+      remember_me: Sign.remember_me
     }
     $http.post(Routes.user_session_path(), {user: params})
       .success(function (res) {

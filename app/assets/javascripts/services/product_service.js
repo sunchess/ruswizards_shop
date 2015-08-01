@@ -1,5 +1,9 @@
-app.service('Product', ['$product', '$http', '$rootScope', function ($product, $http, $rootScope) {
-  var Product = this;
+app.service('Product', ['$product', '$http', '$rootScope', '$location', function ($product, $http, $rootScope, $location) {
+  var Product = this,
+      headers = {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+      };
 
   $rootScope.$watch(function () {
     return Product.inCart
@@ -34,28 +38,37 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
   Product.getCart = function () {
     $http.get(Routes.carts_path({format: 'json'}))
       .success(function (res) {
-          Product.inCart = res;
+        Product.inCart = res;
       })
   }
 
   Product.getOrders = function () {
     $http.get(Routes.orders_path({format: 'json'}))
       .success(function (res) {
-          Product.inCart = res;
+        Product.inCart = res;
       })
   }
 
-  Product.updateCount = function (id, count) {
-    $http.put(Routes.cart_path(id), function (res) {
-      // body...
+  Product.get = $product.get;
+
+  Product.create = function (fd) {
+    $product.create(fd, function (res) {
+      $location.path('/products/'+res.id)
     })
   }
 
-  Product.getCategories = function (withProducts) {
-    $http.get(Routes.categories_path({format: "json"}), {params: {with_products: withProducts}})
-      .success(function (res) {
-        Product.categories = res;
+  Product.update = function (id, fd) {
+    $product.update({id: id}, fd, function (res) {
+      $location.path('/products/'+res.id)
+    })
+  }
+
+  Product.destroy = function (id) {
+    if (confirm('Вы уверены?')) {
+      $product.remove({id: id}, function () {
+        $location.path('/categories')
       })
+    }
   }
 
 }]);
@@ -63,5 +76,8 @@ app.service('Product', ['$product', '$http', '$rootScope', function ($product, $
 app.factory('$product', ['$resource', function ($resource) {
   var productPath = Routes.product_path(":id",  {format: 'json'});
 
-  return $resource(productPath, {id: '@id'});
+  return $resource(productPath, {id: '@id'}, {
+    update: {method: "put", transformRequest: angular.identity, headers: {'Content-Type': undefined}},
+    create: {method: "post", transformRequest: angular.identity, headers: {'Content-Type': undefined}}
+  });
 }])

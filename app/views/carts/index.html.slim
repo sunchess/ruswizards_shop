@@ -33,26 +33,10 @@
                 b Итого к оплате: 
                 span
                   | {{Product.totalCartPrice || 0}} руб
+                br
               - if user_signed_in?
-                a.btn.btn-success href="#contacts" ng-click="carts.showAddressForm = true" Оформить заказ
-    .overlay ng-show="carts.showAddressForm"
-      .carts__contact.modal
-        .modal__close ng-click="carts.showAddressForm = false" &times;
-        h2 Контактные данные
-        form
-          .row
-            label.label Адрес
-            label.input
-              input type="text" ng-model="carts.order.address"
-          .row
-            label.label Телефон
-            label.input
-              input type="text" ng-model="carts.order.phone"
-          .row
-            label.label Контактное лицо
-            label.input
-              input type="text" ng-model="carts.order.fullname"
-          .clearfix
-            .pull-right
-              button.btn.btn-default ng-click="carts.showAddressForm = false" Отмена
-              button.btn.btn-success ng-click="carts.createOrder()" Заказать
+                a.btn.btn-success ng-click="carts.showAddressForm = true" Оформить заказ
+              - else
+                a.btn.btn-success ng-click="Sign.showSign='in'" Оформить заказ
+
+    = render "create_order"

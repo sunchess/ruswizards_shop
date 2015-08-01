@@ -1,16 +1,17 @@
 .container
   h1
+    - if user_signed_in?
+      a.btn.btn-primary.btn-sm.pull-right ng-href="/products/{{products.product.id}}/edit" Редактировать
     | {{products.product.title}}
   
   .product-page
-    img.pull-left.product-page__image ng-src="{{products.product.photos[0].photo.url}}" width="210"
+    img.pull-left.product-page__image ng-src="{{products.product.photo.url}}" width="210"
     
     .product-page__info
-      .row
-        label.label Описание
-        div
-          | {{products.product.title.description || 'Описания нет'}}
-      .row
-        label.label Цена
-        div
-          | {{products.product.price | number}} руб
+      label.label Описание
+      div
+        | {{products.product.description || 'Описания нет'}}
+      br
+      label.label Цена
+      div
+        | {{products.product.price | number}} руб

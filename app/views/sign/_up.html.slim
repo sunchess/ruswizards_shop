@@ -1,25 +1,25 @@
-.sign ng-class="{show: showSign == 'up'}"
+.sign ng-class="{show: Sign.showSign == 'up'}"
   .sign__header
-    .sign__close ng-click="showSign=''" &times;
+    .sign__close ng-click="Sign.showSign=''" &times;
     h3 Регистрация
   .sign__body
     form
-      .row
+      section
         label.label Имя
         .input
           input ng-model="Sign.fullname" type="text"
-      .row
+      section
         label.label Эл. почта
         .input
           input ng-model="Sign.email" type="email"
-      .row
+      section
         label.label Пароль
         .input
           input ng-model="Sign.password" type="password"
-      .row
+      section
         label.checkbox.sign__remember
           input type="checkbox" ng-model="confirmRule"
           .checker
           | Согласен с правилами
-      .row
+      section
         button.btn.btn-primary ng-disabled="!confirmRule" ng-click="Sign.up()" Зарегистрироваться

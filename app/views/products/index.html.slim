@@ -9,7 +9,7 @@ aside.sidebar
     
 
   .sidebar__title Категория
-  .sidebar__category ng-repeat="category in Product.categories"
+  .sidebar__category ng-repeat="category in products.categories"
     label.checkbox
       input type="checkbox" ng-model="Search.filter.category_id[category.id]"
       .checker
@@ -30,7 +30,7 @@ aside.sidebar
   .products__list
     .product ng-repeat="product in Product.list"
       a.product__body ng-href="/products/{{product.id}}"
-        img.product__image ng-src="{{product.photos[0].photo.url}}"
+        img.product__image ng-src="{{product.photo.url}}"
       .product__footer
         .product__title
           | {{::product.title}}

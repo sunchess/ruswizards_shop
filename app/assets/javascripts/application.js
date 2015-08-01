@@ -26,10 +26,9 @@
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource', 'ngNotify']);
 
 
-app.run(['$rootScope', 'Search', 'Product', 'Sign', 'pluralize', function ($rootScope, Search, Product, Sign, pluralize) {
+app.run(['$rootScope', 'Search', 'Product', 'Sign', 'Category', function ($rootScope, Search, Product, Sign, Category) {
   $rootScope.Search = Search;
   $rootScope.Product = Product;
   $rootScope.Sign = Sign;
-
-  $rootScope.pluralize = pluralize;
+  $rootScope.Category = Category;
 }])

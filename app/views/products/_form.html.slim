@@ -1,0 +1,24 @@
+.product-page__image
+  img ng-show="products.product.photo.url" ng-src="{{products.product.photo.url}}" width="210"
+  .product-page__image-empty ng-hide="products.product.photo.url"
+  div
+    label.btn.btn-primary.block for="upload_photo" Загрузить
+    input.hidden#upload_photo type="file" fileread="products.product.file" src="products.product.photo.url"
+
+form.product-page__info
+  section
+    label.label Название товара
+    div
+      input.product-page__field type="text" ng-model="products.product.title"
+  section
+    label.label Описание
+    div
+      textarea.product-page__field ng-model="products.product.description" rows="6"
+  section
+    label.label Цена
+    div
+      af-dimension.disabled ng-model="products.product.price" options="[{id: 1, title: 'руб'}]"
+  section
+    a.btn.btn-danger ng-show="products.product.id" ng-click="Product.destroy(products.product.id)" Удалить
+    | &nbsp;
+    a.btn.btn-success ng-click="products.save()" Сохранить

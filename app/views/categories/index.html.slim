@@ -5,16 +5,17 @@
       a.btn.btn-success.pull-right.manage__add-category href="/category/new" Добавить категорию
 
     ul.manage__category
-      li.manage__category__item ng-repeat="category in Product.categories"
+      li.manage__category__item ng-repeat="category in categories.list"
         .manage__category__title ng-click="open=!open"
           | {{category.title}}
+        a.icon-edit href="/categories/{{category.id}}/edit"
 
         i &nbsp;– {{category.products.length | plur:['товар', 'товара', 'товаров']}}   
-        a.manage__category__add-product href="" + Добавить товар
+        a.manage__category__add-product ng-href="/categories/{{category.id}}/products/new" + Добавить товар
 
         ul.manage__product ng-show="open"
           li.manage__product__item ng-repeat="product in category.products"
-            a.btn.btn-primary.btn-sm.pull-right Редактировать
+            a.manage__product__edit-btn.btn.btn-primary.btn-sm ng-href="/products/{{product.id}}/edit" Редактировать
             a ng-href="/products/{{product.id}}"
               | {{product.title}}
             i.manage__product__price

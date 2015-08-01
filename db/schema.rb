@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731131133) do
+ActiveRecord::Schema.define(version: 20150801092221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "discount_count"
+    t.float    "discount_percent"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150731131133) do
     t.float    "price"
     t.integer  "category_id"
     t.boolean  "delta"
+    t.string   "photo"
   end
 
   create_table "roles", force: :cascade do |t|

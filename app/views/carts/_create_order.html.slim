@@ -1,0 +1,21 @@
+.overlay ng-show="carts.showAddressForm"
+  .carts__contact.modal
+    .modal__close ng-click="carts.showAddressForm = false" &times;
+    h2 Контактные данные
+    form
+      section
+        label.label Адрес
+        label.input
+          input type="text" ng-model="carts.order.address"
+      section
+        label.label Телефон
+        label.input
+          input type="text" ng-model="carts.order.phone"
+      section
+        label.label Контактное лицо
+        label.input
+          input type="text" ng-model="carts.order.fullname"
+      .clearfix
+        .pull-right
+          a.btn.btn-default ng-click="carts.showAddressForm = false" Отмена
+          button.btn.btn-success ng-click="carts.createOrder()" Заказать

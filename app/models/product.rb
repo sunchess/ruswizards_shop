@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  mount_uploader :photo, PhotoUploader
+
   has_many :users_products
   has_many :users, through: :users_products
 
@@ -6,7 +8,9 @@ class Product < ActiveRecord::Base
   has_many :orders, through: :orders_products
   
   belongs_to :category
-  has_many :photos
+
+  validates :title, presence: true, length: { minimum: 3 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
 
   def category_title
     category.title

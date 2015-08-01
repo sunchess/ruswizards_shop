@@ -1,20 +1,20 @@
-.sign ng-class="{show: showSign == 'in'}"
+.sign ng-class="{show: Sign.showSign == 'in'}"
   .sign__header
-    .sign__close ng-click="showSign=''" &times;
+    .sign__close ng-click="Sign.showSign=''" &times;
     h3 Вход
   .sign__body
     form
-      .row
+      section
         label.label Эл. почта
         .input
           input ng-model="Sign.email" type="email"
-      .row
+      section
         label.label Пароль
         .input
           input ng-model="Sign.password" type="password"
-      .row
+      section
         label.checkbox.sign__remember
-          input type="checkbox"
+          input type="checkbox" ng-model="Sign.remember_me"
           .checker
           | Запомнить
 

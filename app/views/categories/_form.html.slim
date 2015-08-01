@@ -1,12 +1,17 @@
 form.manage__category__form
-  .row
+  section
     label.label Название
     .input
       input type="text" ng-model="categories.form.title"
-  .row
+  section
     label.label Акция
     .input
-      input.col-1-2 ng-model="categories.form.dscount_count" type="text" placeholder="От ... штук"
-      input.col-1-2  ng-model="categories.form.discount_procent" type="text" placeholder="Скидка, %"
-  .row
-    a.btn.btn-success ng-click="categories.create()" Сохранить
+      .row
+        .col.col-1-2
+          af-dimension.disabled ng-model="categories.form.discount_count" options="[{id: 1, title: 'штук'}]" before="'от'"
+        .col.col-1-2
+          af-dimension.disabled ng-model="categories.form.discount_percent" options="[{id: 1, title: '%'}]" before="'Скидка'"
+  section
+    a.btn.btn-danger ng-show="categories.form.id" ng-click="Category.destroy(categories.form.id)" Удалить
+    | &nbsp;
+    a.btn.btn-success ng-click="Category.save(categories.form.id, categories.form)" Сохранить

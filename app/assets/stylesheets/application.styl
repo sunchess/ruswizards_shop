@@ -64,9 +64,11 @@ h3
   letter-spacing: 1px
   margin: 10px 0 20px 0
 
-
 a
   color: rgb(3, 169, 244)
+
+form section
+  margin-bottom: 10px
     
 .checkbox
   cursor: pointer
@@ -111,6 +113,12 @@ input[type="password"]
 input[type="number"]
   height: 30px
   padding-left: 8px
+  
+input[type="text"]
+input[type="email"]
+input[type="password"]
+input[type="number"]
+textarea
   border: 1px solid #CCCCCC
   border-radius: 2px
   font-size: 13px
@@ -123,6 +131,10 @@ input[type="number"]
     border-color: #d0ba65;
     -webkit-box-shadow: 0 0 10px #fc0;
     box-shadow: 0 0 10px #fc0;
+
+textarea
+  padding: 8px
+  width: 100%
 
 .noselect
   -webkit-touch-callout: none
@@ -188,6 +200,9 @@ input[type="number"]
     btn(#F44336)
     color: white
 
+.block
+  width: 100%
+
 .sep
   display: inline-block
   height: 30px
@@ -204,7 +219,15 @@ label.label
   color: #808080
   
 .row
-  margin-bottom: 20px
+  margin: 0 -10px
+  
+  &:after
+    visibility: hidden
+    display: block
+    font-size: 0
+    content: " "
+    clear: both
+    height: 0
   
 .input
   input
@@ -282,4 +305,10 @@ label.label
 
 .col-1-2
   width: 50% !important
-    
+  float: left
+
+.col
+  padding: 0 10px
+
+.hidden
+  display: none

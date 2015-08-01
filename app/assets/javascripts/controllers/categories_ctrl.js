@@ -1,12 +1,9 @@
-app.controller('CategoriesCtrl', ['$scope', '$http', '$location', 'Product', function ($scope, $http, $location, Product) {
+app.controller('CategoriesCtrl', ['$scope', 'Category', '$routeParams', function ($scope, Category, $routeParams) {
   var categories = this;
 
-  Product.getCategories(true);
+  categories.list = Category.all(true);
 
-  categories.create = function () {
-    $http.post(Routes.categories_path({format: 'json'}), {category: categories.form})
-      .success(function () {
-        $location.path('/categories')
-      })
+  if ($routeParams.category_id) {
+    categories.form = Category.get({id: $routeParams.category_id})
   }
 }])
