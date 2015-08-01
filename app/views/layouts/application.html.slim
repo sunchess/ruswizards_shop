@@ -28,10 +28,14 @@ html ng-app="app"
 
       .header__user
         - if user_signed_in?
-          .header__user__name
-            | #{current_user.fullname} (
-            a ng-click="Sign.out()" href="" Выход
-            | )
+          div
+            .header__user__name
+              | #{current_user.fullname} (
+              a ng-click="Sign.out()" href="" Выход
+              | )
+          - if current_user.has_role? :admin
+            .header__user__users-link
+              a href="/users" Управление пользователями
         - else
           a.btn.btn-success.header__user__btn ng-click="Sign.showSign='up'" Регистрация
           a.btn.btn-primary.header__user__btn ng-click="Sign.showSign='in'" Вход

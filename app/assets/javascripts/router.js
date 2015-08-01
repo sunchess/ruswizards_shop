@@ -3,17 +3,14 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when('/', {
       templateUrl: Routes.products_path(),
       controller: 'ProductsCtrl as products',
-      reloadOnSearch: false
     })
     .when('/products/:product_id', {
       templateUrl: Routes.product_path(0),
       controller: 'ProductsCtrl as products',
-      reloadOnSearch: false
     })
     .when('/products/:product_id/edit', {
       templateUrl: Routes.edit_product_path(0),
       controller: 'ProductsCtrl as products',
-      reloadOnSearch: false
     })
     .when('/carts', {
       templateUrl: Routes.carts_path(),
@@ -32,22 +29,22 @@ app.config(['$routeProvider', function ($routeProvider) {
       .when('/categories', {
         templateUrl: Routes.categories_path(),
         controller: 'CategoriesCtrl as categories',
-        reloadOnSearch: false
       })
       .when('/category/new', {
         templateUrl: Routes.new_category_path(),
         controller: 'CategoriesCtrl as categories',
-        reloadOnSearch: false
       })
       .when('/categories/:category_id/edit', {
         templateUrl: Routes.edit_category_path('id'),
         controller: 'CategoriesCtrl as categories',
-        reloadOnSearch: false
       })
       .when('/categories/:category_id/products/new', {
         templateUrl: Routes.new_product_path(),
         controller: 'ProductsCtrl as products',
-        reloadOnSearch: false
+      })
+      .when('/users', {
+        templateUrl: Routes.manage_path(),
+        controller: 'UsersCtrl as users',
       })
 
   $routeProvider

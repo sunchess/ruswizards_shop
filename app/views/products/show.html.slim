@@ -1,6 +1,6 @@
 .container
   h1
-    - if user_signed_in?
+    - if user_signed_in? and current_user.is_admin?
       a.btn.btn-primary.btn-sm.pull-right ng-href="/products/{{products.product.id}}/edit" Редактировать
     | {{products.product.title}}
   

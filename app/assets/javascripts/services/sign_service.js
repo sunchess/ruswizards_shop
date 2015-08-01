@@ -11,6 +11,11 @@ app.service('Sign', ['$http', function ($http) {
       .success(function (res) {
         window.location.reload()
       })
+      .error(function (res, status) {
+        if (status == 403) {
+          window.location.reload();
+        }
+      })
   }
 
   Sign.up = function () {

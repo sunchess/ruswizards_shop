@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
     user_products = Product.joins(:users_products).select("products.*, users_products.*").distinct.where(users_products: filter)
     user_products.map &:attributes
   end
+
+  def is_admin?
+    has_role? :admin
+  end
 end

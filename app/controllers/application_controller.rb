@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :user_needed, except: [:index]
+  before_action :user_banned
 
   layout :false
 
@@ -11,8 +12,6 @@ class ApplicationController < ActionController::Base
     gon.categories = Category.all
     gon.user = {}
 
-
-    
     if current_user
       gon.user = {
         info: current_user.as_json(only: [:fullname]),
@@ -32,6 +31,19 @@ class ApplicationController < ActionController::Base
     def user_needed
       unless current_user
         render :json => {'msg' => 'Вы не авторизованы'}, :status => 401
+      end
+    end
+
+    def user_banned
+      if current_user && current_user.banned?
+        render :json => {'msg' => 'Вы заблокированы'}, :status => 403
+        sign_out current_user
+      end
+    end
+
+    def check_rule
+      unless current_user.is_admin?
+        render json: {msg: "У вас нет прав на данное действие"}, status: 401
       end
     end
 end

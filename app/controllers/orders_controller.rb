@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :order_params, only: [:create]
 
   def index
-    render json: current_user.orders.includes(:products).includes(:orders_products).as_json(include: [:products], methods: [:price, :count])
+    render json: current_user.orders.includes(:products).includes(:orders_products).as_json(include: [:products, :orders_products], methods: [:price, :count])
   end
 
   def create

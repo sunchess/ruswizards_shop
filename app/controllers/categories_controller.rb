@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
 
+  before_action :check_rule, except: [:index]
+
   def index
     respond_to do |format|
       format.html

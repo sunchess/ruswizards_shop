@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:update, :destroy]
+  before_action :check_rule, except: [:index, :show]
 
   skip_before_action :user_needed, only: [:index, :show]
-
 
   # GET /products
   # GET /products.json

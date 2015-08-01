@@ -13,12 +13,14 @@ Rails.application.routes.draw do
       get '/delivery' => 'pages#delivery'
     end
 
-    resources :orders
+    scope :users do
+      get 'manage' => 'users#manage'
+      put 'manage' => 'users#ban'
+    end
     
+    resources :orders
     resources :carts
-
     resources :products
-
     resources :categories
   end
 
