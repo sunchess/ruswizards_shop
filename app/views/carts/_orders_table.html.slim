@@ -1,0 +1,9 @@
+ul.order-list
+  li ng-repeat="order in Product.inCart"
+    b Заказ от {{order.created_at | date:"dd.MM.yyyy hh:mm"}}
+    i
+      | &nbsp; – {{order.count | plur:['товар', 'товара', 'товаров']}}
+      |  на сумму {{order.price | number}} руб
+    ul
+      li ng-repeat="product in order.products"
+        a ng-href="/products/{{product.id}}" {{product.title}}

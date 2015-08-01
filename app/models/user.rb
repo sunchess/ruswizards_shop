@@ -18,9 +18,4 @@ class User < ActiveRecord::Base
     user_products = Product.joins(:users_products).select("products.*, users_products.*").distinct.where(users_products: filter)
     user_products.map &:attributes
   end
-
-  def products_in_orders
-    order_products = orders.joins(:orders_products).joins(:products).select("products.*, orders_products.*").distinct
-    order_products.map &:attributes
-  end
 end

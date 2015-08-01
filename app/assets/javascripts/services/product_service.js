@@ -14,7 +14,7 @@ app.service('Product', ['$product', '$http', '$rootScope', '$location', function
       _.each(val, function (product) {
         count = parseInt(product.count);
         Product.countInCart += count;
-        Product.totalCartPrice += product.price * count;
+        Product.totalCartPrice += product.price;
       })
     }
   }, true);

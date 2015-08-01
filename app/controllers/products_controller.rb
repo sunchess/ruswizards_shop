@@ -25,10 +25,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def manage_catalog
-
-  end
-
   # GET /products/1
   # GET /products/1.json
   def show

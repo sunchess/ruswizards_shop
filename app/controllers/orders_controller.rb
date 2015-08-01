@@ -2,16 +2,14 @@ class OrdersController < ApplicationController
   before_action :order_params, only: [:create]
 
   def index
-    render json: current_user.products_in_orders
+    render json: current_user.orders.includes(:products).includes(:orders_products).as_json(include: [:products], methods: [:price, :count])
   end
 
   def create
     order = current_user.orders.create @order_params
-    current_user.users_products.each do |users_product|
-      orders_product = users_product.slice(:count, :product_id)
-      orders_product[:order_id] = order.id
-      OrdersProduct.create(orders_product)
-    end
+    orders_product = current_user.users_products.as_json(only: [:count, :product_id, :price])
+
+    OrdersProduct.where(order_id: order.id).create(orders_product)
 
     current_user.users_products.destroy_all
 

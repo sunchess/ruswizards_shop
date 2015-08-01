@@ -17,7 +17,10 @@ class CartsController < ApplicationController
   end
   
   def create
-    user_product = UsersProduct.create(user_id: user_id, product_id: params[:id], count: params[:count])
+    user_product = UsersProduct.where(user_id: user_id, product_id: params[:id]).first_or_create
+    user_product.count += params[:count]
+    user_product.save
+
     unless current_user
       session[:users_products_ids] ||= []
       session[:users_products_ids] << user_product.id

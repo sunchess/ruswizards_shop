@@ -6,4 +6,12 @@ class Order < ActiveRecord::Base
   validates :address, presence: true
   validates :phone, presence: true
   validates :fullname, presence: true
+
+  def price
+    orders_products.sum(:price)
+  end
+
+  def count
+    orders_products.sum(:count)
+  end
 end

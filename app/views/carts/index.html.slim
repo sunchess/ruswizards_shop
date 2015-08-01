@@ -6,37 +6,9 @@
 
         - if user_signed_in?
           a.tab href="/carts?tab=orders" ng-class="{active: carts.tab=='orders'}" Заказы
-      div ng-hide="Product.inCart.length" В корзине пусто
-      table.table ng-show="Product.inCart.length"
-        thead
-          tr
-            th Наименование товара
-            th.w0 Количество
-            th.w0 Стоимость
-            th
-        tbody
-          tr ng-repeat="product in Product.inCart"
-            td
-              | {{product.title}}
-            td.w0
-              input.carts__count type="number" ng-model="product.count" min="1" ng-show="carts.tab=='cart'"
-              .carts__count ng-show="carts.tab=='orders'"
-                | {{product.count}}
-            td.w0
-              | {{product.price * product.count | number}} руб
-            td.w0
-              a.btn.btn-danger ng-show="carts.tab=='cart'" ng-click="Product.deleteFromCart($index, product.id)" Удалить
-        tfoot ng-show="carts.tab=='cart'"
-          tr
-            td.align-right colspan="4"
-              .row
-                b Итого к оплате: 
-                span
-                  | {{Product.totalCartPrice || 0}} руб
-                br
-              - if user_signed_in?
-                a.btn.btn-success ng-click="carts.showAddressForm = true" Оформить заказ
-              - else
-                a.btn.btn-success ng-click="Sign.showSign='in'" Оформить заказ
+      div ng-show="carts.tab=='cart'"
+        = render "cart_table"
+      div ng-show="carts.tab=='orders'"
+        = render "orders_table"
 
     = render "create_order"
