@@ -46,7 +46,6 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
   
-  gem 'awesome_print'
 
   gem 'factory_girl_rails'
   gem 'faker'
@@ -87,3 +86,4 @@ gem 'aasm'
 gem 'google_currency'
 gem 'js-routes'
 gem "rolify"
+gem 'awesome_print'
