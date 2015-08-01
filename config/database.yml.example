@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  pool: 5
+
+development:
+  <<: *default
+  database: ruswizards_shop_dev
+
+test:
+  <<: *default
+  database: ruswizards_shop_test
+
+staging:
+  <<: *default
+  database: ruswizards_shop_stage
+
+release:
+  <<: *default
+  database: ruswizards_shop_release
+
+
+
+production:
+  <<: *default
+  database: ruswizards_shop_prod
