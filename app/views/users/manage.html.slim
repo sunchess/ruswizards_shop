@@ -13,6 +13,6 @@
           | {{user.fullname}}
         td.w0
           label.checkbox ng-hide="user['is_admin?']"
-            input type="checkbox" ng-change="users.ban(user.id, banned)" ng-model="banned"
+            input type="checkbox" ng-change="users.ban(user.id, user.banned)" ng-model="user.banned"
             .checker
             | Заблокирован
