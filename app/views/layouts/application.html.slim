@@ -7,7 +7,7 @@ html ng-app="app"
     title RusWizard Shop
     = csrf_meta_tags
     = stylesheet_link_tag 'application'
-  body
+  body ng-class="{'overflow-x': loadingPage}" animate-page="loadingPage"
     header.header
       nav.nav
         ul.nav__list
@@ -43,7 +43,7 @@ html ng-app="app"
     = render "sign/in"
     = render "sign/up"
 
-    ng-view.content
+    ng-view.content.slide
     
     = render 'components/dimension'
     

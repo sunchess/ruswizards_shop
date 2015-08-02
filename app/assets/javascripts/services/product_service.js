@@ -1,4 +1,4 @@
-app.service('Product', ['$product', '$http', '$rootScope', '$location', function ($product, $http, $rootScope, $location) {
+app.service('Product', ['$product', '$cart', '$http', '$rootScope', '$location', function ($product, $cart, $http, $rootScope, $location) {
   var Product = this,
       headers = {
         transformRequest: angular.identity,
@@ -19,11 +19,12 @@ app.service('Product', ['$product', '$http', '$rootScope', '$location', function
     }
   }, true);
 
-  Product.addToCart = function (product, count) {
-    $http.post(Routes.carts_path(), {id: product.id, count: count})
-      .success(function (res) {
-        Product.inCart = res;
-      })
+  Product.updateCountInCart = function (product, count, isUpdate) {
+    if (isUpdate) {
+      Product.inCart = $cart.update({id: product.id, count: count})
+    } else {
+      Product.inCart = $cart.save({id: product.id, count: count})
+    }
   }
 
   Product.deleteFromCart = function ($index, id) {
@@ -80,4 +81,12 @@ app.factory('$product', ['$resource', function ($resource) {
     update: {method: "put", transformRequest: angular.identity, headers: {'Content-Type': undefined}},
     create: {method: "post", transformRequest: angular.identity, headers: {'Content-Type': undefined}}
   });
-}])
+}]);
+
+app.factory('$cart', ['$resource', function ($resource) {
+  var productPath = Routes.cart_path(":id",  {format: 'json'});
+
+  return $resource(productPath, {id: '@id'}, {
+    update: {method: "put", isArray: true},
+  });
+}]);

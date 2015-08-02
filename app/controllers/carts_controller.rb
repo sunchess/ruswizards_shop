@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
 
   skip_before_action :user_needed
+  before_action :check_cart_rule, only: [:create, :update]
 
   def index
     respond_to do |format|
@@ -17,17 +18,27 @@ class CartsController < ApplicationController
   end
   
   def create
-    user_product = UsersProduct.where(user_id: user_id, product_id: params[:id]).first_or_create
+    user_product = UsersProduct.where(user_id: user_id, id: params[:id]).first_or_create
     user_product.count += params[:count]
     user_product.save
 
-    unless current_user
-      session[:users_products_ids] ||= []
-      session[:users_products_ids] << user_product.id
-      users_products_ids = session[:users_products_ids]
-    else
-      users_products_ids = nil
+    session[:users_products_ids] ||= []
+    session[:users_products_ids] << user_product.id
+
+    users_products_ids = current_user ? nil : session[:users_products_ids]
+
+    render json: User.products_in_cart(user_id, users_products_ids)
+  end
+
+  def update
+    user_product = UsersProduct.find_by(user_id: user_id, id: params[:id])
+    user_product.update(count: params[:count])
+
+    if params[:count] == 0
+      session[:users_products_ids].delete params[:id]
     end
+
+    users_products_ids = current_user ? nil : session[:users_products_ids]
 
     render json: User.products_in_cart(user_id, users_products_ids)
   end
@@ -45,5 +56,11 @@ class CartsController < ApplicationController
   private
     def user_id
       current_user.id rescue 0
+    end
+
+    def check_cart_rule
+      if !current_user && session[:users_products_ids].exclude?(params[:id].to_i)
+        render json: {msg: "У вас нет прав на это действие"}, status: 401
+      end
     end
 end

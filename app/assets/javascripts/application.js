@@ -31,4 +31,4 @@ app.run(['$rootScope', 'Search', 'Product', 'Sign', 'Category', function ($rootS
   $rootScope.Product = Product;
   $rootScope.Sign = Sign;
   $rootScope.Category = Category;
-}])
+}]);

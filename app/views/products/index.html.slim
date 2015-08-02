@@ -1,11 +1,12 @@
 aside.sidebar
-  .sidebar__title Корзина
-  .sidebar__cart-no-result ng-hide="Product.inCart.length"
-    | Корзина пуста
+  .sidebar__cart animate-cart="Product.countInCart"
+    .sidebar__title Корзина
+    .sidebar__cart-no-result ng-hide="Product.countInCart"
+      | Корзина пуста
 
-  .sidebar__cart-result.ng-cloak ng-show="Product.inCart.length"
-    | {{Product.countInCart | plur:['товар', 'товара', 'товаров']}} на сумму {{Product.totalCartPrice | number}} руб.
-  a href="/carts?tab=cart" ng-show="Product.inCart.length" Просмотр
+    .sidebar__cart-result.ng-cloak ng-show="Product.countInCart"
+      | {{Product.countInCart | plur:['товар', 'товара', 'товаров']}} на сумму {{Product.totalCartPrice | number}} руб.
+    a href="/carts?tab=cart" ng-show="Product.countInCart" Просмотр
     
 
   .sidebar__title Категория
@@ -41,4 +42,4 @@ aside.sidebar
         .product__add-to-cart ng-click="showInput = true" ng-class="{show: showInput}"
           input type="number" placeholder="Кол-во" ng-model="count" min="0"
           span В корзину
-          i.icon-check ng-click="Product.addToCart(product, count); showInput = false; count = 0; $event.stopPropagation()"
+          i.icon-check ng-click="Product.updateCountInCart(product, count); showInput = false; count = 0; $event.stopPropagation()"

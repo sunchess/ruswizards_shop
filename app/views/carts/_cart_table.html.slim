@@ -11,7 +11,7 @@ table.table ng-show="Product.inCart.length"
       td
         | {{product.title}}
       td.w0
-        input.carts__count type="number" ng-model="product.count" min="1" ng-show="carts.tab=='cart'"
+        input.carts__count type="number" ng-model="product.count" min="1" ng-show="carts.tab=='cart'" ng-change="Product.updateCountInCart(product, product.count, true)" ng-model-options="{debounce: 500}"
         .carts__count ng-show="carts.tab=='orders'"
           | {{product.count}}
       td.w0
