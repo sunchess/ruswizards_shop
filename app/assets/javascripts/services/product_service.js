@@ -8,7 +8,7 @@ app.service('Product', ['$product', '$cart', '$http', '$rootScope', '$location',
   $rootScope.$watch(function () {
     return Product.inCart
   }, function (val) {
-    if (val && val.length) {
+    if (val) {
       Product.countInCart = 0;
       Product.totalCartPrice = 0;
       _.each(val, function (product) {
@@ -21,26 +21,22 @@ app.service('Product', ['$product', '$cart', '$http', '$rootScope', '$location',
 
   Product.updateCountInCart = function (product, count, isUpdate) {
     if (isUpdate) {
-      Product.inCart = $cart.update({id: product.id, count: count})
+      Product.inCart = $cart.update({id: product.id, product_id: product.id,  count: count})
     } else {
-      Product.inCart = $cart.save({id: product.id, count: count})
+      Product.inCart = $cart.create({product_id: product.id, count: count})
     }
   }
 
   Product.deleteFromCart = function ($index, id) {
     if (confirm("Вы уверены?")) {
-      $http.delete(Routes.cart_path(id))
-        .success(function (res) {
-          Product.inCart = res.user_products;
-        })
+      $cart.delete({id: id}, function (res) {
+        Product.inCart = res.user_products; 
+      });
     }
   }
 
   Product.getCart = function () {
-    $http.get(Routes.carts_path({format: 'json'}))
-      .success(function (res) {
-        Product.inCart = res;
-      })
+    Product.inCart = $cart.query();
   }
 
   Product.getOrders = function () {
@@ -88,5 +84,6 @@ app.factory('$cart', ['$resource', function ($resource) {
 
   return $resource(productPath, {id: '@id'}, {
     update: {method: "put", isArray: true},
+    create: {method: "post", isArray: true},
   });
 }]);

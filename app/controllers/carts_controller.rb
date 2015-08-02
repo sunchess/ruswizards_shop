@@ -18,12 +18,9 @@ class CartsController < ApplicationController
   end
   
   def create
-    user_product = UsersProduct.where(user_id: user_id, id: params[:id]).first_or_create
-    user_product.count += params[:count]
-    user_product.save
+    @user_product.update(count: @user_product.count + params[:count])
 
-    session[:users_products_ids] ||= []
-    session[:users_products_ids] << user_product.id
+    session[:users_products_ids] << @user_product.id
 
     users_products_ids = current_user ? nil : session[:users_products_ids]
 
@@ -31,11 +28,11 @@ class CartsController < ApplicationController
   end
 
   def update
-    user_product = UsersProduct.find_by(user_id: user_id, id: params[:id])
+    user_product = UsersProduct.find_by(user_id: user_id, id: params[:product_id])
     user_product.update(count: params[:count])
 
     if params[:count] == 0
-      session[:users_products_ids].delete params[:id]
+      session[:users_products_ids].delete params[:product_id]
     end
 
     users_products_ids = current_user ? nil : session[:users_products_ids]
@@ -59,7 +56,12 @@ class CartsController < ApplicationController
     end
 
     def check_cart_rule
-      if !current_user && session[:users_products_ids].exclude?(params[:id].to_i)
+      @user_product = UsersProduct.where(user_id: user_id, product_id: params[:product_id])
+      session[:users_products_ids] ||= []
+
+      if current_user || !@user_product.first || @user_product.first && session[:users_products_ids].include?(params[:product_id].to_i)
+        @user_product = @user_product.first_or_create
+      else
         render json: {msg: "У вас нет прав на это действие"}, status: 401
       end
     end

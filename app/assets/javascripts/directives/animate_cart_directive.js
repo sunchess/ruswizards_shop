@@ -17,7 +17,6 @@ app.directive('animateCart', ['$timeout', function ($timeout) {
     // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
     link: function($scope, iElm, iAttrs, controller) {
       $scope.$watch('animateCart', function (v) {
-        console.log(v)
         if (v!=undefined) {
           iElm.addClass('active')
 
